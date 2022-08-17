@@ -1,8 +1,10 @@
-import { ChakraProvider, Portal, useDisclosure } from "@chakra-ui/react"
+import { ChakraProvider, useDisclosure } from "@chakra-ui/react"
 import React from "react"
-import { Route } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import theme from "theme/theme.js"
 import MainPanel from "../components/Layout/MainPanel"
+import PanelContainer from "../components/Layout/PanelContainer"
+import PanelContent from "../components/Layout/PanelContent"
 import Navbar from "../components/Navbar/Navbar.js"
 import Sidebar from "../components/Sidebar"
 import routes from "../routes.js"
@@ -13,7 +15,7 @@ export default function Dashboard(props) {
   const [sidebarVariant, setSidebarVariant] = React.useState("transparent")
   const [fixed, setFixed] = React.useState(false)
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { onOpen, onClose } = useDisclosure()
 
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text"
@@ -64,10 +66,12 @@ export default function Dashboard(props) {
       if (prop.collapse) {
         return getRoutes(prop.views)
       }
+
       if (prop.category === "account") {
         return getRoutes(prop.views)
       }
-      if (prop.layout === "/admin") {
+
+      if (prop.layout === "/home") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -97,16 +101,26 @@ export default function Dashboard(props) {
           xl: "calc(100% - 275px)",
         }}
       >
-        <Portal>
-          <Navbar
-            onOpen={onOpen}
-            logoText={"Defi4Everyone"}
-            brandText={getActiveRoute(routes)}
-            secondary={getActiveNavbar(routes)}
-            fixed={fixed}
-            {...rest}
-          />
-        </Portal>
+        <Navbar
+          onOpen={onOpen}
+          logoText={"Defi4Everyone"}
+          brandText={getActiveRoute(routes)}
+          secondary={getActiveNavbar(routes)}
+          fixed={fixed}
+          {...rest}
+        />
+
+        <PanelContent>
+          <PanelContainer>
+            <Routes>
+              {getRoutes(routes)}
+              <Route
+                path="/"
+                element={<Navigate replace to="/home/dashboard" />}
+              />
+            </Routes>
+          </PanelContainer>
+        </PanelContent>
       </MainPanel>
     </ChakraProvider>
   )
