@@ -1,15 +1,14 @@
-// import
-import Dashboard from "views/Dashboard/Dashboard"
+import Home from "./views/Home"
 
-import { HomeIcon } from "components/Icons/Icons"
+import { HomeIcon } from "./components/Icons/Icons"
 
 var dashRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard",
+    path: "/",
+    name: "Home",
     icon: <HomeIcon color="inherit" />,
-    component: Dashboard,
-    layout: "/admin",
+    component: Home,
+    layout: "/",
   },
 ]
 export default dashRoutes
