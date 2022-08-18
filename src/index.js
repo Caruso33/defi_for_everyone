@@ -1,19 +1,22 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
+import { MoralisProvider } from "react-moralis"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import "./index.css"
-import reportWebVitals from "./reportWebVitals"
 import HomeLayout from "./layouts/HomeLayout.js"
+import reportWebVitals from "./reportWebVitals"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path={`/home/*`} element={<HomeLayout />} />
-        <Route path="*" element={<Navigate replace to="/home" />} />
-      </Routes>
+      <MoralisProvider initializeOnMount={false}>
+        <Routes>
+          <Route path={`/home/*`} element={<HomeLayout />} />
+          <Route path="*" element={<Navigate replace to="/home" />} />
+        </Routes>
+      </MoralisProvider>
     </BrowserRouter>
   </React.StrictMode>
 )
