@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { MoralisProvider } from "react-moralis"
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom"
 import "./index.css"
 import HomeLayout from "./layouts/HomeLayout.js"
 import reportWebVitals from "./reportWebVitals"
@@ -12,10 +12,10 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <MoralisProvider initializeOnMount={false}>
-        <Routes>
-          <Route path={`/home/*`} element={<HomeLayout />} />
-          <Route path="*" element={<Navigate replace to="/home" />} />
-        </Routes>
+        <Switch>
+          <Route path={`/home`} component={HomeLayout} />
+          <Redirect from={`/`} to="/home/dashboard" />
+        </Switch>
       </MoralisProvider>
     </BrowserRouter>
   </React.StrictMode>

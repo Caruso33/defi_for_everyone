@@ -1,6 +1,6 @@
 import { ChakraProvider, useDisclosure } from "@chakra-ui/react"
 import React from "react"
-import { Navigate, Route, Routes } from "react-router-dom"
+import { Navigate, Redirect, Route, Switch } from "react-router-dom"
 import theme from "theme/theme.js"
 import MainPanel from "../components/Layout/MainPanel"
 import PanelContainer from "../components/Layout/PanelContainer"
@@ -107,13 +107,10 @@ export default function Dashboard(props) {
 
         <PanelContent>
           <PanelContainer>
-            <Routes>
+            <Switch>
               {getRoutes(routes)}
-              <Route
-                path="/"
-                element={<Navigate replace to="/home/dashboard" />}
-              />
-            </Routes>
+              <Redirect from="/home" to="/home/dashboard" />
+            </Switch>
           </PanelContainer>
         </PanelContent>
       </MainPanel>

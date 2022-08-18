@@ -13,9 +13,9 @@ import PropTypes from "prop-types"
 import React, { useState } from "react"
 import NavbarLinks from "./NavbarLinks"
 
-export default function AdminNavbar(props) {
+export default function Navbar(props) {
   const [scrolled, setScrolled] = useState(false)
-  const { variant, children, secondary, brandText, onOpen, ...rest } = props
+  const { variant, children, secondary, brandText, onOpen, ..._rest } = props
 
   // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   let mainText = useColorModeValue("gray.700", "gray.200")
@@ -137,7 +137,7 @@ export default function AdminNavbar(props) {
   )
 }
 
-AdminNavbar.propTypes = {
+Navbar.propTypes = {
   brandText: PropTypes.string,
   variant: PropTypes.string,
   secondary: PropTypes.bool,
