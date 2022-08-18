@@ -12,10 +12,7 @@ import routes from "../routes.js"
 export default function Dashboard(props) {
   const { ...rest } = props
 
-  const [sidebarVariant, setSidebarVariant] = React.useState("transparent")
-  const [fixed, setFixed] = React.useState(false)
-
-  const { onOpen, onClose } = useDisclosure()
+  const { onOpen } = useDisclosure()
 
   const getActiveRoute = (routes) => {
     let activeRoute = "Default Brand Text"
@@ -91,7 +88,6 @@ export default function Dashboard(props) {
         routes={routes}
         logoText={"Defi4Everyone"}
         display="none"
-        sidebarVariant={sidebarVariant}
         {...rest}
       />
 
@@ -106,7 +102,6 @@ export default function Dashboard(props) {
           logoText={"Defi4Everyone"}
           brandText={getActiveRoute(routes)}
           secondary={getActiveNavbar(routes)}
-          fixed={fixed}
           {...rest}
         />
 

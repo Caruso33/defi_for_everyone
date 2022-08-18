@@ -15,8 +15,7 @@ import NavbarLinks from "./NavbarLinks"
 
 export default function AdminNavbar(props) {
   const [scrolled, setScrolled] = useState(false)
-  const { variant, children, fixed, secondary, brandText, onOpen, ...rest } =
-    props
+  const { variant, children, secondary, brandText, onOpen, ...rest } = props
 
   // Here are all the props that may change depending on navbar's type or state.(secondary, variant, scrolled)
   let mainText = useColorModeValue("gray.700", "gray.200")
@@ -29,23 +28,7 @@ export default function AdminNavbar(props) {
   let navbarBorder = "transparent"
   let secondaryMargin = "0px"
   let paddingX = "15px"
-  if (props.fixed === true)
-    if (scrolled === true) {
-      navbarPosition = "fixed"
-      navbarShadow = useColorModeValue(
-        "0px 7px 23px rgba(0, 0, 0, 0.05)",
-        "none"
-      )
-      navbarBg = useColorModeValue(
-        "linear-gradient(112.83deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.8) 110.84%)",
-        "linear-gradient(112.83deg, rgba(255, 255, 255, 0.21) 0%, rgba(255, 255, 255, 0) 110.84%)"
-      )
-      navbarBorder = useColorModeValue("#FFFFFF", "rgba(255, 255, 255, 0.31)")
-      navbarFilter = useColorModeValue(
-        "none",
-        "drop-shadow(0px 7px 23px rgba(0, 0, 0, 0.05))"
-      )
-    }
+
   if (props.secondary) {
     navbarBackdrop = "none"
     navbarPosition = "absolute"
