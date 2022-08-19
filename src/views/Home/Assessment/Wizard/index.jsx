@@ -15,6 +15,7 @@ const StepWizardStyled = styled(StepWizard)`
 
 const Card = styled(Container)`
   cursor: pointer;
+  height: 100%;
   &:hover {
     background-color: #4fd1c5;
     transform: translateY(-5px);
