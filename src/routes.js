@@ -1,6 +1,6 @@
+import { HelpIcon, HomeIcon } from "./components/Icons/Icons"
+import Assessment from "./views/Home/Assessment"
 import Home from "./views/Home/Home"
-
-import { HomeIcon } from "./components/Icons/Icons"
 
 var dashRoutes = [
   {
@@ -8,6 +8,13 @@ var dashRoutes = [
     name: "Home",
     icon: <HomeIcon color="inherit" />,
     component: Home,
+    layout: "/home",
+  },
+  {
+    path: "/assessment",
+    name: "Assessment",
+    icon: <HelpIcon color="inherit" />,
+    component: Assessment,
     layout: "/home",
   },
 ]
