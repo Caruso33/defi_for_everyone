@@ -16,9 +16,6 @@ const NavButtons = ({
 }) => {
   const history = useHistory()
 
-  console.dir("totalSteps", totalSteps)
-  console.dir("hideForward", hideForward)
-
   function navigateToPortfolio() {
     history.push("/home/portfolio")
   }

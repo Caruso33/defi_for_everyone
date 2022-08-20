@@ -45,12 +45,13 @@ export default function CalculationFeedback(props) {
       ) {
         setLoadingVaults(true)
 
-        await getVaultData()
         storeAssessmentToIPFS()
+        await getVaultData()
 
         setLoadingVaults(false)
       }
     }
+
     getVaultsForRiskProfile()
   }, [
     state,
@@ -80,7 +81,7 @@ export default function CalculationFeedback(props) {
 
       const timer = setInterval(() => {
         updateProgress()
-      }, 70)
+      }, 50)
       setTimer(timer)
     }
 
