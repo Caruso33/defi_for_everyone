@@ -14,11 +14,8 @@ import {
   Text,
   Th,
   Thead,
-  Tr,
+  Tr
 } from "@chakra-ui/react"
-import { getTokenInfo } from "api/ethplorer"
-import { ethers } from "ethers"
-import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import NavButtons from "./NavButtons"
 

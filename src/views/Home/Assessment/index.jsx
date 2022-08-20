@@ -4,6 +4,7 @@ import { useState } from "react"
 // import { LOCAL_STORAGE_PREFERENCES_CID_KEY } from "variables/general.js"
 // import { storeFilesToIPFS } from "../../../components/storage/save.js"
 import CalculationFeedback from "./Wizard/CalculationFeedback.jsx"
+import DisplayResults from "./Wizard/DisplayResults.jsx"
 import Goals from "./Wizard/Goals.jsx"
 import { Nav, StepWizardStyled, ValueToInvest } from "./Wizard/index.jsx"
 
@@ -52,6 +53,11 @@ export default function Assessment() {
           state={assessmentState}
           vaults={{ vaultData, setVaultData }}
           // storeAssessmentToIPFS={storeAssessmentToIPFS}
+        />
+
+        <DisplayResults
+          state={{ ...assessmentState, onValueChange }}
+          vaults={vaultData}
         />
       </StepWizardStyled>
     </Flex>

@@ -1,4 +1,4 @@
-import * as vaultData from "../../vault_data.json"
+import vaultData from "../../vault_data.json"
 
 export function calculateRiskProfile(state) {
   if (state.valueRiskProfile === null) {
@@ -11,6 +11,5 @@ export function calculateRiskProfile(state) {
 }
 
 export function getVaults(_riskProfile) {
-  console.dir(vaultData)
-  return vaultData//.map((vault) => vault)
+  return vaultData.map((vault) => vault)
 }

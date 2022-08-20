@@ -1,6 +1,6 @@
-import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons";
-import { Button, Center, Text } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { ArrowBackIcon, ArrowForwardIcon } from "@chakra-ui/icons"
+import { Button, Center, Text } from "@chakra-ui/react"
+import { useHistory } from "react-router-dom"
 
 const NavButtons = ({
   currentStep,
@@ -14,10 +14,13 @@ const NavButtons = ({
   hideForward,
   children,
 }) => {
-  const history = useHistory();
+  const history = useHistory()
+
+  console.dir("totalSteps", totalSteps)
+  console.dir("hideForward", hideForward)
 
   function navigateToPortfolio() {
-    history.push("/admin/portfolio");
+    history.push("/home/portfolio")
   }
 
   return (
@@ -43,7 +46,7 @@ const NavButtons = ({
           </Button>
         ))}
     </Center>
-  );
-};
+  )
+}
 
-export default NavButtons;
+export default NavButtons

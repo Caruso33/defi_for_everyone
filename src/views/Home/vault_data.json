@@ -1,23 +1,32 @@
 [
   {
     "name": "Guttastemning",
+    "address": "0xbb57f06e8c7dbc253b06e3d4b4bd89eb677ab7c5",
+    "url": "https://app.enzyme.finance/vault/0x23d3285bfe4fd42965a821f3aecf084f5bd40ef4",
+    "reserveAsset": "ETH",
+    "aum": 3349587.93,
     "M-1": -4.2,
     "M-2": 48.65,
-    "M-3": -31.6,
-    "address": "0xbb57f06e8c7dbc253b06e3d4b4bd89eb677ab7c5"
+    "M-3": -31.6
   },
   {
     "name": "USF Fund I",
+    "address": "0xf5be8b4c82b8a681bacf357cfb712ab9e9296cb2",
+    "url": "https://app.enzyme.finance/vault/0x86fb84e92c1eedc245987d28a42e123202bd6701",
+    "reserveAsset": "ETH",
+    "aum": 27222400.66,
     "M-1": -2.51,
     "M-2": 59.66,
-    "M-3": -45.61,
-    "address": "0xf5be8b4c82b8a681bacf357cfb712ab9e9296cb2"
+    "M-3": -45.61
   },
   {
     "name": "Techemy Capital - Holistic ETH-BTC Fund",
+    "address": "0xb3f8d948b26c4805f945c01fab023c4c8a6efef2",
+    "url": "https://app.enzyme.finance/vault/0xded69068a94776a23f5bdafc6b4c6894bc88e82c",
+    "reserveAsset": "ETH",
+    "aum": 626404.07,
     "M-1": -2.56,
     "M-2": 25.27,
-    "M-3": -5.9,
-    "address": "0xb3f8d948b26c4805f945c01fab023c4c8a6efef2"
+    "M-3": -5.9
   }
 ]
