@@ -29,7 +29,6 @@ export default function ValueToInvest(props) {
   const tokensState = useSelector((state) => state.tokens)
 
   const ethPrice = tokensState?.nativeToken?.price?.rate || 0
-  const ethCurrency = tokensState?.nativeToken?.price?.currency || "USD"
 
   function onSliderChange(value) {
     state.onValueSliderChange("valueToInvest", value)
@@ -110,9 +109,10 @@ export default function ValueToInvest(props) {
 
           <Slider
             min={0}
-            value={state.valueToInvest || 0}
-            max={state.walletValueETH}
-            step={state.walletValueETH / 10}
+            value={state.valueToInvest}
+            max={1}
+            // max={ethBalance}
+            step={0.01}
             defaultValue={0}
             colorScheme="teal"
             onChange={onSliderChange}

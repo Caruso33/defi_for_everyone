@@ -1,9 +1,9 @@
-import styled from "@emotion/styled";
+import styled from "@emotion/styled"
 
 const NavStyled = styled.div`
   margin-top: 15px;
   text-align: center;
-`;
+`
 
 const NavDotStyled = styled.span`
   width: 8rem;
@@ -23,15 +23,15 @@ const NavDotStyled = styled.span`
       return `
     background-color: #4fd1c5;
     opacity: 1;
-    `;
+    `
   }}
-`;
+`
 
 const Nav = (props) => {
-  const dots = [];
+  const dots = []
 
   for (let i = 1; i <= props.totalSteps; i += 1) {
-    const isActive = props.currentStep === i;
+    const isActive = props.currentStep === i
 
     dots.push(
       <NavDotStyled
@@ -39,10 +39,10 @@ const Nav = (props) => {
         active={isActive}
         onClick={() => props.goToStep(i)}
       />
-    );
+    )
   }
 
-  return <NavStyled>{dots}</NavStyled>;
-};
+  return <NavStyled>{dots}</NavStyled>
+}
 
-export { Nav as default };
+export { Nav as default }
