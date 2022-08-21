@@ -136,7 +136,7 @@ export default function DisplayResults(props) {
                     </TableContainer>
 
                     <Link mt="1rem" wordBreak="break-all">
-                      <Text fontSize="sm">{vaultData.url}</Text>
+                      <Text fontSize="sm">{`https://app.enzyme.finance/vault/${vaultData.url}`}</Text>
                     </Link>
                   </Card>
                 )
