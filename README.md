@@ -26,3 +26,4 @@ Make DeFi-Investments a no-brainer.
   - Have one up-to-date investment collection for each investor
   - Have one up-to-date preference collection for each investor
 - Improve portfolio tracking & overview
+- Add subgraph metrics

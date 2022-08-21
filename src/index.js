@@ -15,9 +15,9 @@ import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "./utils/variables"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
 function App() {
-  useGetWalletBalances()
-  useGetTokenPrices()
-  useGetInvestments()
+  // useGetWalletBalances()
+  // useGetTokenPrices()
+  // useGetInvestments()
 
   return (
     <Switch>

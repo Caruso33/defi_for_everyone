@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.6.12;
 
-contract IComptroller {
+interface IComptroller {
   ///////////////////
   // PARTICIPATION //
   ///////////////////
@@ -20,7 +20,7 @@ contract IComptroller {
     address _buyer,
     uint256 _investmentAmount,
     uint256 _minSharesQuantity
-  ) external returns (uint256 sharesReceived_) {}
+  ) external returns (uint256 sharesReceived_);
 
   /// @notice Buys shares
   /// @param _investmentAmount The amount of the fund's denomination asset
@@ -29,8 +29,7 @@ contract IComptroller {
   /// @return sharesReceived_ The actual amount of shares received
   function buyShares(uint256 _investmentAmount, uint256 _minSharesQuantity)
     external
-    returns (uint256 sharesReceived_)
-  {}
+    returns (uint256 sharesReceived_);
 
   // REDEEM SHARES
 
@@ -49,7 +48,7 @@ contract IComptroller {
     uint256 _sharesQuantity,
     address[] calldata _payoutAssets,
     uint256[] calldata _payoutAssetPercentages
-  ) external returns (uint256[] memory payoutAmounts_) {}
+  ) external returns (uint256[] memory payoutAmounts_);
 
   /// @notice Redeems a specified amount of the sender's shares
   /// for a proportionate slice of the vault's assets
@@ -75,5 +74,5 @@ contract IComptroller {
     uint256 _sharesQuantity,
     address[] calldata _additionalAssets,
     address[] calldata _assetsToSkip
-  ) external returns (address[] memory payoutAssets_, uint256[] memory payoutAmounts_) {}
+  ) external returns (address[] memory payoutAssets_, uint256[] memory payoutAmounts_);
 }

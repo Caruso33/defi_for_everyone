@@ -5,6 +5,7 @@ import { useWeb3Contract } from "react-moralis"
 import { useSelector } from "react-redux"
 import { retrieveFilesFromIPFS, storeFilesToIPFS } from "../../../api/web3storage.js"
 import iComptroller from "../../../utils/IComptroller.json"
+import iVault from "../../../utils/IVault.json"
 import {
   LOCAL_STORAGE_INVESTMENTS_CID_KEY,
   LOCAL_STORAGE_PREFERENCES_CID_KEY,
@@ -146,9 +147,32 @@ export default function Assessment() {
     },
   })
 
+  const provider = ethers.providers.getDefaultProvider("http://localhost:8545")
+  // const vault = new ethers.Contract(
+  //   "0x536b50fc8aef821f6ad2b3b70a2ad43afc483736",
+  //   iVault.abi,
+  //   provider.getSigner()
+  // )
+
+  // useEffect(() => {
+  //   async function getComptroller() {
+  //     console.dir("comptroller", comptroller)
+  //   }
+
+  //   getVaults()
+  // }, [])
+
   async function investInVault() {
     try {
-      await runContractFunction()
+      const vault = new ethers.Contract(vaultChoice.address, iVault.abi, provider.getSigner())
+      const comptrollerAddress = await vault?.getAccessor()
+      const comptroller = new ethers.Contract(
+        comptrollerAddress,
+        iComptroller.abi,
+        provider.getSigner()
+      )
+
+      // await runContractFunction()
       if (error) throw new Error(error)
 
       storeInvestmentToIPFS()

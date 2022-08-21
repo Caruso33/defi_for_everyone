@@ -14,7 +14,7 @@ import {
   Text,
   Th,
   Thead,
-  Tr
+  Tr,
 } from "@chakra-ui/react"
 import { useSelector } from "react-redux"
 import NavButtons from "./NavButtons"
@@ -34,22 +34,12 @@ export default function ValueToInvest(props) {
   const ethBalance = (+userState.nativeBalance || 0) / 1e18
   const ethValue = ethBalance * ethPrice
 
-console.dir("ethBalance", ethBalance)
-
   return (
     <Flex direction={"column"} alignItems="center" maxW="80vw">
       <NavButtons step={1} {...props} />
 
-      <Box
-        border="1px"
-        borderRadius="xl"
-        px="5rem"
-        py="2rem"
-        borderColor="gray.500"
-      >
-        <Text fontSize="2xl">
-          Your wallet currently has {ethBalance.toFixed(4)} ETH.
-        </Text>
+      <Box border="1px" borderRadius="xl" px="5rem" py="2rem" borderColor="gray.500">
+        <Text fontSize="2xl">Your wallet currently has {ethBalance.toFixed(4)} ETH.</Text>
 
         <TableContainer>
           <Table variant="simple">
@@ -70,9 +60,7 @@ console.dir("ethBalance", ethBalance)
               {userState.tokenBalances.map((token) => {
                 const balance = token.balance / Math.pow(10, +token.decimals)
 
-                const tokenInfo = tokensState.tokens.find(
-                  (t) => t.address === token.token_address
-                )
+                const tokenInfo = tokensState.tokens.find((t) => t.address === token.token_address)
 
                 const tokenPrice = tokenInfo?.price?.rate || 0
                 const tokenValue = balance * tokenPrice
@@ -98,10 +86,7 @@ console.dir("ethBalance", ethBalance)
               <Text>{state.valueToInvest} ETH</Text>
 
               {state.walletValueNative === 0 && (
-                <Text>
-                  Sorry, not enough ETH funds to invest. Please top up your
-                  wallet.
-                </Text>
+                <Text>Sorry, not enough ETH funds to invest. Please top up your wallet.</Text>
               )}
             </Flex>
           </Center>
