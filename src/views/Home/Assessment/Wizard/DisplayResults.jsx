@@ -10,18 +10,14 @@ import {
   Text,
   Tr,
 } from "@chakra-ui/react"
-import { ethers } from "ethers"
 import { useState } from "react"
-import { useSelector } from "react-redux"
 import { Card } from "./index"
 import NavButtons from "./NavButtons"
 
 export default function DisplayResults(props) {
   const [deposited, setDeposited] = useState(false)
 
-  const userAddress = useSelector((user) => user.address)
-
-  const { state, vaults } = props
+  const { state, vaults, investInVault } = props
 
   function onCardClick(value) {
     setDeposited(false)
@@ -29,31 +25,13 @@ export default function DisplayResults(props) {
     state.onValueChange("valueVaultChoice", value)
   }
 
-  async function investInVault() {
+  async function onClickInvest() {
     setDeposited(false)
 
-    const { valueToInvest, valueVaultChoice } = state
+    await investInVault()
 
-    const vaultChoice = vaults[valueVaultChoice - 1]
-
-    const vaultContract = new ethers.Contract(vaultChoice.address, []) //signer)
-
-    const amountIn = ethers.utils.parseUnits(`${valueToInvest}`, 18)
-    const minAmountOut = 0
-    const to = userAddress
-    const referer = "0x4bFC74983D6338D3395A00118546614bB78472c2"
-
-    try {
-      await vaultContract
-        // .connect(signer)
-        .deposit(amountIn, minAmountOut, to, referer, {
-          value: amountIn,
-        })
-      onCardClick(null) // reset vault
-      setDeposited(true)
-    } catch (e) {
-      console.error(e.message)
-    }
+    onCardClick(null) // reset vault
+    setDeposited(true)
   }
 
   return (
@@ -65,15 +43,11 @@ export default function DisplayResults(props) {
           <>
             <Text fontSize="2xl">Recommendations ready.</Text>
             <br />
-            <Text fontSize="2xl">
-              Vaults shown are most aligned with your determined needs.
-            </Text>
+            <Text fontSize="2xl">Vaults shown are most aligned with your determined needs.</Text>
 
             <Flex>
               {vaults.slice(0, 3).map((vault, index) => {
-                let vaultData = vaults.find(
-                  (data) => data.address === vault.address
-                )
+                let vaultData = vaults.find((data) => data.address === vault.address)
                 if (!vaultData) {
                   vaultData = {
                     description: "",
@@ -143,16 +117,14 @@ export default function DisplayResults(props) {
               })}
             </Flex>
 
-            <Button disabled={!state.valueVaultChoice} onClick={investInVault}>
+            <Button disabled={!state.valueVaultChoice} onClick={onClickInvest}>
               Deposit
             </Button>
 
             {deposited && <Text> Successfully deposited to chosen vault.</Text>}
           </>
         ) : (
-          <Text fontSize="2xl">
-            Vaults not loaded. Were you missing some steps?
-          </Text>
+          <Text fontSize="2xl">Vaults not loaded. Were you missing some steps?</Text>
         )}
       </Box>
     </Flex>

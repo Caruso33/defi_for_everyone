@@ -2,7 +2,7 @@ import { ethers } from "ethers"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getTokenInfo } from "../api/ethplorer"
-import { tokenActions } from "../state/tokens"
+import { tokenActions } from "../state/token"
 import _isEmpty from "lodash/isEmpty"
 
 export function useGetTokenPrices() {
@@ -43,10 +43,7 @@ export function useGetTokenPrices() {
     }
 
     if (_isEmpty(tokensState.nativeToken) && userState.nativeBalance) {
-      if (
-        !tokensState.isNativeTokenLoading &&
-        !tokensState.isNativeTokenLoaded
-      ) {
+      if (!tokensState.isNativeTokenLoading && !tokensState.isNativeTokenLoaded) {
         getEthInfo()
       }
     }

@@ -1,5 +1,5 @@
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js"
-import { STORAGE_API_TOKEN } from "../variables/general"
+import { STORAGE_API_TOKEN } from "../utils/variables"
 // import { Web3Storage, Web3File } from 'web3.storage';
 
 const client = new Web3Storage({ token: STORAGE_API_TOKEN })
@@ -39,9 +39,10 @@ export async function retrieveFilesFromIPFS(cid) {
   const files = await res.files()
 
   for (const file of files) {
-    console.log(
-      `${file.cid}: ${file.name} ${await file.text()} (${file.size} bytes)`
-    )
+    console.log(`${file.cid}: ${file.name} ${file.type} (${file.size} bytes)
+
+    ${await file.text()}
+    `)
   }
 
   return files

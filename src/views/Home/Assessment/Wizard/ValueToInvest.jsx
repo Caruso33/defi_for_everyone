@@ -95,7 +95,7 @@ export default function ValueToInvest(props) {
             <Flex flexDirection="column" alignItems="center">
               <Text>{state.valueToInvest} ETH</Text>
 
-              {state.walletValueETH === 0 && (
+              {state.walletValueNative === 0 && (
                 <Text>
                   Sorry, not enough ETH funds to invest. Please top up your
                   wallet.

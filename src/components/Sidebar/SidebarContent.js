@@ -1,20 +1,12 @@
 /*eslint-disable*/
 // chakra imports
-import {
-  Box,
-  Button,
-  Flex,
-  Link,
-  Stack,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { Box, Button, Flex, Link, Stack, Text, useColorModeValue } from "@chakra-ui/react"
 import IconBox from "components/Icons/IconBox"
 import { CreativeTimLogo } from "components/Icons/Icons"
 import { Separator } from "components/Separator/Separator"
 import React from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import { PUBLIC_URL } from "variables/general"
+import { PUBLIC_URL } from "../../utils/variables"
 
 // this function creates the links and collapses that appear in the sidebar (left menu)
 
@@ -57,9 +49,7 @@ const SidebarContent = ({ logoText, routes }) => {
               }}
               py="12px"
             >
-              {document.documentElement.dir === "rtl"
-                ? prop.rtlName
-                : prop.name}
+              {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
             </Text>
             {createLinks(prop.views)}
           </div>
@@ -100,20 +90,12 @@ const SidebarContent = ({ logoText, routes }) => {
                 {typeof prop.icon === "string" ? (
                   <Icon>{prop.icon}</Icon>
                 ) : (
-                  <IconBox
-                    bg="teal.300"
-                    color="white"
-                    h="30px"
-                    w="30px"
-                    me="12px"
-                  >
+                  <IconBox bg="teal.300" color="white" h="30px" w="30px" me="12px">
                     {prop.icon}
                   </IconBox>
                 )}
                 <Text color={activeColor} my="auto" fontSize="sm">
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
+                  {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
                 </Text>
               </Flex>
             </Button>
@@ -150,20 +132,12 @@ const SidebarContent = ({ logoText, routes }) => {
                 {typeof prop.icon === "string" ? (
                   <Icon>{prop.icon}</Icon>
                 ) : (
-                  <IconBox
-                    bg={inactiveBg}
-                    color="teal.300"
-                    h="30px"
-                    w="30px"
-                    me="12px"
-                  >
+                  <IconBox bg={inactiveBg} color="teal.300" h="30px" w="30px" me="12px">
                     {prop.icon}
                   </IconBox>
                 )}
                 <Text color={inactiveColor} my="auto" fontSize="sm">
-                  {document.documentElement.dir === "rtl"
-                    ? prop.rtlName
-                    : prop.name}
+                  {document.documentElement.dir === "rtl" ? prop.rtlName : prop.name}
                 </Text>
               </Flex>
             </Button>

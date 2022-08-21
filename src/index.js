@@ -1,3 +1,4 @@
+import useGetInvestments from "hooks/useGetInvestments"
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { MoralisProvider } from "react-moralis"
@@ -9,13 +10,14 @@ import "./index.css"
 import HomeLayout from "./layouts/HomeLayout.js"
 import reportWebVitals from "./reportWebVitals"
 import store from "./state/store"
-import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "./variables/general"
+import { MORALIS_APP_ID, MORALIS_SERVER_URL } from "./utils/variables"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 
 function App() {
   useGetWalletBalances()
   useGetTokenPrices()
+  useGetInvestments()
 
   return (
     <Switch>

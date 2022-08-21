@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "start": "BROWSER=none react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "yarn run compile && cp artifacts/contract/IComptroller.sol/IComptroller.json src/utils && react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "compile": "hardhat compile"
+    "compile": "hardhat compile",
+    "node": "hardhat node"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.8",
