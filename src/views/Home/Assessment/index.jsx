@@ -6,8 +6,8 @@ import { useSelector } from "react-redux"
 import { retrieveFilesFromIPFS, storeFilesToIPFS } from "../../../api/web3storage.js"
 import iComptroller from "../../../utils/IComptroller.json"
 import {
-  LOCAL_STORAGE_PREFERENCES_CID_KEY,
   LOCAL_STORAGE_INVESTMENTS_CID_KEY,
+  LOCAL_STORAGE_PREFERENCES_CID_KEY,
 } from "../../../utils/variables"
 import CalculationFeedback from "./Wizard/CalculationFeedback.jsx"
 import DisplayResults from "./Wizard/DisplayResults.jsx"
@@ -89,7 +89,7 @@ export default function Assessment() {
     try {
       const cid = await storeFilesToIPFS(
         `${userAddress}_pref.json`,
-        JSON.stringify([...prevPref, assessmentState])
+        JSON.stringify([...prevPref, { ...assessmentState, timestamp: Date.now() }])
       )
 
       if (cid) {
@@ -101,6 +101,8 @@ export default function Assessment() {
       console.error(e.message)
     }
   }
+  const vaultChoice =
+    assessmentState.valueVaultChoice && vaultData[assessmentState.valueVaultChoice - 1]
 
   async function storeInvestmentToIPFS() {
     try {
@@ -112,8 +114,9 @@ export default function Assessment() {
         JSON.stringify([
           ...prevInvestments,
           {
-            valueInvested,
+            valueInvested: valueInvested.toString(),
             remainingBalance: +assessmentState.walletValueNative - +valueInvested,
+            vault: vaultChoice,
 
             timestamp: currentBlock.timestamp,
             currentBlock: currentBlock.number,
@@ -122,8 +125,8 @@ export default function Assessment() {
       )
 
       if (cid) {
-        localStorage.setItem(LOCAL_STORAGE_PREFERENCES_CID_KEY, cid)
-        console.log("Wrote preference to IPFS", cid)
+        localStorage.setItem(LOCAL_STORAGE_INVESTMENTS_CID_KEY, cid)
+        console.log("Wrote investments to IPFS", cid)
         console.log(`read file on https://${cid}.ipfs.dweb.link`)
       }
     } catch (e) {
@@ -131,12 +134,10 @@ export default function Assessment() {
     }
   }
 
-  const vaultChoice =
-    assessmentState.valueVaultChoice ?? vaultData[assessmentState.valueVaultChoice - 1]
-
   const { error, runContractFunction } = useWeb3Contract({
     abi: iComptroller.abi,
     contractAddress: vaultChoice?.address,
+    msgValue: ethers.utils.parseEther(assessmentState.valueToInvest?.toString() || "0"),
     // buyShares(uint256 _investmentAmount, uint256 _minSharesQuantity)
     functionName: "buyShares",
     params: {
@@ -147,8 +148,10 @@ export default function Assessment() {
 
   async function investInVault() {
     try {
-      runContractFunction()
+      await runContractFunction()
       if (error) throw new Error(error)
+
+      storeInvestmentToIPFS()
     } catch (e) {
       console.error(e.message)
     }

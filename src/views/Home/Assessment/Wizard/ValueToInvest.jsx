@@ -31,8 +31,10 @@ export default function ValueToInvest(props) {
     state.onValueSliderChange("valueToInvest", value)
   }
 
-  const ethBalance = (+userState.nativeBalance?.balance || 0) / 1e18
+  const ethBalance = (+userState.nativeBalance || 0) / 1e18
   const ethValue = ethBalance * ethPrice
+
+console.dir("ethBalance", ethBalance)
 
   return (
     <Flex direction={"column"} alignItems="center" maxW="80vw">
@@ -107,8 +109,8 @@ export default function ValueToInvest(props) {
           <Slider
             min={0}
             value={state.valueToInvest}
-            max={1}
-            // max={ethBalance}
+            // max={1}
+            max={ethBalance}
             step={0.01}
             defaultValue={0}
             colorScheme="teal"

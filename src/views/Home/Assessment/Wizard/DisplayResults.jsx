@@ -41,9 +41,9 @@ export default function DisplayResults(props) {
       <Box border="1px" borderRadius="xl" p="2rem" borderColor="gray.500">
         {vaults.length ? (
           <>
-            <Text fontSize="2xl">Recommendations ready.</Text>
+            <Text fontSize="xl">Recommendations ready.</Text>
             <br />
-            <Text fontSize="2xl">Vaults shown are most aligned with your determined needs.</Text>
+            <Text fontSize="xl">Vaults shown are most aligned with your determined needs.</Text>
 
             <Flex>
               {vaults.slice(0, 3).map((vault, index) => {
@@ -108,6 +108,10 @@ export default function DisplayResults(props) {
                         </Tbody>
                       </Table>
                     </TableContainer>
+
+                    <Text fontSize="sm" mt="1rem" wordBreak="break-all">
+                      {vaultData.address}
+                    </Text>
 
                     <Link mt="1rem" wordBreak="break-all">
                       <Text fontSize="sm">{`https://app.enzyme.finance/vault/${vaultData.url}`}</Text>
