@@ -2,28 +2,28 @@
   {
     "name": "Guttastemning",
     "address": "0x23d3285bfe4fd42965a821f3aecf084f5bd40ef4",
-    "reserveAsset": "ETH",
+    "reserveAsset": "USDC",
     "aum": 3349587.93,
     "M-1": -4.2,
     "M-2": 48.65,
     "M-3": -31.6
   },
   {
-    "name": "USF Fund I",
-    "address": "0x86fb84e92c1eedc245987d28a42e123202bd6701",
-    "reserveAsset": "ETH",
-    "aum": 27222400.66,
-    "M-1": -2.51,
-    "M-2": 59.66,
-    "M-3": -45.61
-  },
-  {
     "name": "Techemy Capital - Holistic ETH-BTC Fund",
     "address": "0xded69068a94776a23f5bdafc6b4c6894bc88e82c",
-    "reserveAsset": "ETH",
+    "reserveAsset": "USDC",
     "aum": 626404.07,
     "M-1": -2.56,
     "M-2": 25.27,
     "M-3": -5.9
+  },
+  {
+    "name": "P10X Capital",
+    "address": "0xfa61d61db727573c9bd8e447122b2350ccef9d61",
+    "reserveAsset": "USDC",
+    "aum": 375956.1,
+    "M-1": 0.26,
+    "M-2": 28.35,
+    "M-3": -29.71
   }
 ]

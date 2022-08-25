@@ -45,7 +45,7 @@ export default function CalculationFeedback(props) {
       ) {
         setLoadingVaults(true)
 
-        storeAssessmentToIPFS()
+        // storeAssessmentToIPFS()
         await getVaultData()
 
         setLoadingVaults(false)

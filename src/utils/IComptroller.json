@@ -6,22 +6,64 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "_investmentAmount",
-          "type": "uint256"
+          "internalType": "address",
+          "name": "",
+          "type": "address"
         },
         {
-          "internalType": "uint256",
-          "name": "_minSharesQuantity",
-          "type": "uint256"
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
-      "name": "buyShares",
+      "name": "activate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "name": "calcGav",
       "outputs": [
         {
           "internalType": "uint256",
-          "name": "sharesReceived_",
+          "name": "",
           "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "name": "calcGrossShareValue",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
         }
       ],
       "stateMutability": "nonpayable",
@@ -31,107 +73,115 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_buyer",
+          "name": "",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "_investmentAmount",
+          "name": "",
           "type": "uint256"
         },
         {
-          "internalType": "uint256",
-          "name": "_minSharesQuantity",
-          "type": "uint256"
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
         }
       ],
-      "name": "buySharesOnBehalf",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "sharesReceived_",
-          "type": "uint256"
-        }
-      ],
+      "name": "callOnExtension",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_recipient",
-          "type": "address"
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
         },
         {
-          "internalType": "uint256",
-          "name": "_sharesQuantity",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address[]",
-          "name": "_payoutAssets",
-          "type": "address[]"
-        },
-        {
-          "internalType": "uint256[]",
-          "name": "_payoutAssetPercentages",
-          "type": "uint256[]"
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
         }
       ],
-      "name": "redeemSharesForSpecificAssets",
+      "name": "configureExtensions",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "destruct",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDenominationAsset",
       "outputs": [
         {
-          "internalType": "uint256[]",
-          "name": "payoutAmounts_",
-          "type": "uint256[]"
+          "internalType": "address",
+          "name": "",
+          "type": "address"
         }
       ],
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getVaultProxy",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
       "inputs": [
         {
           "internalType": "address",
-          "name": "_recipient",
+          "name": "",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "_sharesQuantity",
+          "name": "",
           "type": "uint256"
-        },
-        {
-          "internalType": "address[]",
-          "name": "_additionalAssets",
-          "type": "address[]"
-        },
-        {
-          "internalType": "address[]",
-          "name": "_assetsToSkip",
-          "type": "address[]"
         }
       ],
-      "name": "redeemSharesInKind",
-      "outputs": [
+      "name": "init",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
         {
-          "internalType": "address[]",
-          "name": "payoutAssets_",
-          "type": "address[]"
+          "internalType": "enum IComptroller.VaultAction",
+          "name": "",
+          "type": "uint8"
         },
         {
-          "internalType": "uint256[]",
-          "name": "payoutAmounts_",
-          "type": "uint256[]"
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
         }
       ],
+      "name": "permissionedVaultAction",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b5061044c806100206000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c80633462fcc1146100515780636af8e7eb1461019e578063877fd89414610333578063beebc5da1461039f575b600080fd5b6101476004803603608081101561006757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190803590602001906401000000008111156100ae57600080fd5b8201836020820111156100c057600080fd5b803590602001918460208302840111640100000000831117156100e257600080fd5b90919293919293908035906020019064010000000081111561010357600080fd5b82018360208201111561011557600080fd5b8035906020019184602083028401116401000000008311171561013757600080fd5b90919293919293905050506103eb565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b8381101561018a57808201518184015260208101905061016f565b505050509050019250505060405180910390f35b610294600480360360808110156101b457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190803590602001906401000000008111156101fb57600080fd5b82018360208201111561020d57600080fd5b8035906020019184602083028401116401000000008311171561022f57600080fd5b90919293919293908035906020019064010000000081111561025057600080fd5b82018360208201111561026257600080fd5b8035906020019184602083028401116401000000008311171561028457600080fd5b90919293919293905050506103f7565b604051808060200180602001838103835285818151815260200191508051906020019060200280838360005b838110156102db5780820151818401526020810190506102c0565b50505050905001838103825284818151815260200191508051906020019060200280838360005b8381101561031d578082015181840152602081019050610302565b5050505090500194505050505060405180910390f35b6103896004803603606081101561034957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919080359060200190929190505050610405565b6040518082815260200191505060405180910390f35b6103d5600480360360408110156103b557600080fd5b81019080803590602001909291908035906020019092919050505061040e565b6040518082815260200191505060405180910390f35b60609695505050505050565b606080965096945050505050565b60009392505050565b60009291505056fea26469706673582212203c11eb121ac8029af7d564fd3806e2b38163e09f87942c24cb58121bf4072f4b64736f6c634300060c0033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c80633462fcc1146100515780636af8e7eb1461019e578063877fd89414610333578063beebc5da1461039f575b600080fd5b6101476004803603608081101561006757600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190803590602001906401000000008111156100ae57600080fd5b8201836020820111156100c057600080fd5b803590602001918460208302840111640100000000831117156100e257600080fd5b90919293919293908035906020019064010000000081111561010357600080fd5b82018360208201111561011557600080fd5b8035906020019184602083028401116401000000008311171561013757600080fd5b90919293919293905050506103eb565b6040518080602001828103825283818151815260200191508051906020019060200280838360005b8381101561018a57808201518184015260208101905061016f565b505050509050019250505060405180910390f35b610294600480360360808110156101b457600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff16906020019092919080359060200190929190803590602001906401000000008111156101fb57600080fd5b82018360208201111561020d57600080fd5b8035906020019184602083028401116401000000008311171561022f57600080fd5b90919293919293908035906020019064010000000081111561025057600080fd5b82018360208201111561026257600080fd5b8035906020019184602083028401116401000000008311171561028457600080fd5b90919293919293905050506103f7565b604051808060200180602001838103835285818151815260200191508051906020019060200280838360005b838110156102db5780820151818401526020810190506102c0565b50505050905001838103825284818151815260200191508051906020019060200280838360005b8381101561031d578082015181840152602081019050610302565b5050505090500194505050505060405180910390f35b6103896004803603606081101561034957600080fd5b81019080803573ffffffffffffffffffffffffffffffffffffffff1690602001909291908035906020019092919080359060200190929190505050610405565b6040518082815260200191505060405180910390f35b6103d5600480360360408110156103b557600080fd5b81019080803590602001909291908035906020019092919050505061040e565b6040518082815260200191505060405180910390f35b60609695505050505050565b606080965096945050505050565b60009392505050565b60009291505056fea26469706673582212203c11eb121ac8029af7d564fd3806e2b38163e09f87942c24cb58121bf4072f4b64736f6c634300060c0033",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
   "linkReferences": {},
   "deployedLinkReferences": {}
 }

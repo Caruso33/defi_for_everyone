@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react"
+import { Button, Flex } from "@chakra-ui/react"
 import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { useWeb3Contract } from "react-moralis"
@@ -14,6 +14,7 @@ import CalculationFeedback from "./Wizard/CalculationFeedback.jsx"
 import DisplayResults from "./Wizard/DisplayResults.jsx"
 import Goals from "./Wizard/Goals.jsx"
 import { Nav, StepWizardStyled, ValueToInvest } from "./Wizard/index.jsx"
+import IERC20 from "../../../utils/IERC20.json"
 
 export default function Assessment() {
   const userAddress = useSelector((state) => state.user.address)
@@ -30,12 +31,31 @@ export default function Assessment() {
     valueVaultChoice: null,
   })
 
+  async function test() {
+    console.log("TEST")
+    const usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    const usdcOwner = "0xfcb19e6a322b27c06842a71e8c725399f049ae3a"
+
+    // await network.provider.request({
+    //   method: "hardhat_impersonateAccount",
+    //   params: [usdcOwner],
+    // })
+
+    const signer = ethers.network.getSigner()
+
+    const usdcContract = new ethers.Contract(usdcAddress, IERC20.abi, signer)
+    console.log(usdcContract)
+
+    const ownerBalance = await usdcContract.balanceOf(usdcOwner)
+    console.log("ownerBalance", ownerBalance)
+  }
+
   useEffect(() => {
     async function getPrevPref() {
       async function readAssementFromIPFS() {
         if (assessmentState.valueToInvest) return
 
-        const cid = localStorage.getItem(LOCAL_STORAGE_PREFERENCES_CID_KEY)
+        const cid = localStorage.getItem(`${LOCAL_STORAGE_PREFERENCES_CID_KEY}-${userAddress}`)
         if (cid) {
           console.log("Reading preference from IPFS", cid)
 
@@ -68,7 +88,7 @@ export default function Assessment() {
     }
 
     getPrevPref()
-  }, [assessmentState.valueToInvest])
+  }, [assessmentState.valueToInvest, userAddress])
 
   useEffect(() => {
     if (userNativeBalance && assessmentState.walletValueNative === null) {
@@ -94,7 +114,7 @@ export default function Assessment() {
       )
 
       if (cid) {
-        localStorage.setItem(LOCAL_STORAGE_PREFERENCES_CID_KEY, cid)
+        localStorage.setItem(`${LOCAL_STORAGE_PREFERENCES_CID_KEY}-${userAddress}`, cid)
         console.log("Wrote preference to IPFS", cid)
         console.log(`read file on https://${cid}.ipfs.dweb.link`)
       }
@@ -126,7 +146,7 @@ export default function Assessment() {
       )
 
       if (cid) {
-        localStorage.setItem(LOCAL_STORAGE_INVESTMENTS_CID_KEY, cid)
+        localStorage.setItem(`${LOCAL_STORAGE_INVESTMENTS_CID_KEY}-${userAddress}`, cid)
         console.log("Wrote investments to IPFS", cid)
         console.log(`read file on https://${cid}.ipfs.dweb.link`)
       }
@@ -166,6 +186,7 @@ export default function Assessment() {
     try {
       const vault = new ethers.Contract(vaultChoice.address, iVault.abi, provider.getSigner())
       const comptrollerAddress = await vault?.getAccessor()
+
       const comptroller = new ethers.Contract(
         comptrollerAddress,
         iComptroller.abi,
@@ -183,6 +204,8 @@ export default function Assessment() {
 
   return (
     <Flex pt={{ base: "120px", md: "75px" }}>
+      <Button onClick={() => test()}>Test</Button>
+
       <StepWizardStyled nav={<Nav />}>
         <ValueToInvest state={{ ...assessmentState, onValueSliderChange }} />
 
