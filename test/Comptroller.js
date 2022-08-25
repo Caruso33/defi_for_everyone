@@ -48,6 +48,8 @@ describe("Comptroller", function () {
       let usdcBalance = await usdcContractProxy.balanceOf(address)
       console.log("usdc before", usdcBalance.toString())
 
+      await usdcContractProxy.approve(comptrollerAddress, usdcBalance.toNumber())
+
       const minSharesQuantities = 1
       await comptrollerProxy.buyShares([address], [usdcBalance.toNumber()], [minSharesQuantities])
 
