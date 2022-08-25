@@ -2,7 +2,6 @@ const IERC20 = require("../artifacts/contracts/IERC20.sol/IERC20.json")
 
 async function transferUsdc(hre) {
   const { deployments, ethers, network, getNamedAccounts } = hre
-
   const { log } = deployments
 
   const usdcAddressProxy = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"

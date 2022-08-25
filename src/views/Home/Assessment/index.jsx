@@ -1,20 +1,19 @@
-import { Button, Flex } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 import { ethers } from "ethers"
 import { useEffect, useState } from "react"
 import { useWeb3Contract } from "react-moralis"
 import { useSelector } from "react-redux"
 import { retrieveFilesFromIPFS, storeFilesToIPFS } from "../../../api/web3storage.js"
-import iComptroller from "../../../utils/IComptroller.json"
+import ComptrollerLib from "../../../utils/ComptrollerLib.json"
 import iVault from "../../../utils/IVault.json"
 import {
   LOCAL_STORAGE_INVESTMENTS_CID_KEY,
-  LOCAL_STORAGE_PREFERENCES_CID_KEY,
+  LOCAL_STORAGE_PREFERENCES_CID_KEY
 } from "../../../utils/variables"
 import CalculationFeedback from "./Wizard/CalculationFeedback.jsx"
 import DisplayResults from "./Wizard/DisplayResults.jsx"
 import Goals from "./Wizard/Goals.jsx"
 import { Nav, StepWizardStyled, ValueToInvest } from "./Wizard/index.jsx"
-import IERC20 from "../../../utils/IERC20.json"
 
 export default function Assessment() {
   const userAddress = useSelector((state) => state.user.address)
@@ -30,25 +29,6 @@ export default function Assessment() {
     valueMarketReaction: null,
     valueVaultChoice: null,
   })
-
-  async function test() {
-    console.log("TEST")
-    const usdcAddress = "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
-    const usdcOwner = "0xfcb19e6a322b27c06842a71e8c725399f049ae3a"
-
-    // await network.provider.request({
-    //   method: "hardhat_impersonateAccount",
-    //   params: [usdcOwner],
-    // })
-
-    const signer = ethers.network.getSigner()
-
-    const usdcContract = new ethers.Contract(usdcAddress, IERC20.abi, signer)
-    console.log(usdcContract)
-
-    const ownerBalance = await usdcContract.balanceOf(usdcOwner)
-    console.log("ownerBalance", ownerBalance)
-  }
 
   useEffect(() => {
     async function getPrevPref() {
@@ -156,7 +136,7 @@ export default function Assessment() {
   }
 
   const { error, runContractFunction } = useWeb3Contract({
-    abi: iComptroller.abi,
+    abi: ComptrollerLib.abi,
     contractAddress: vaultChoice?.address,
     msgValue: ethers.utils.parseEther(assessmentState.valueToInvest?.toString() || "0"),
     // buyShares(uint256 _investmentAmount, uint256 _minSharesQuantity)
@@ -189,7 +169,7 @@ export default function Assessment() {
 
       const comptroller = new ethers.Contract(
         comptrollerAddress,
-        iComptroller.abi,
+        ComptrollerLib.abi,
         provider.getSigner()
       )
 
@@ -204,8 +184,6 @@ export default function Assessment() {
 
   return (
     <Flex pt={{ base: "120px", md: "75px" }}>
-      <Button onClick={() => test()}>Test</Button>
-
       <StepWizardStyled nav={<Nav />}>
         <ValueToInvest state={{ ...assessmentState, onValueSliderChange }} />
 
