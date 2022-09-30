@@ -1,7 +1,7 @@
 const IERC20 = require("../artifacts/contracts/IERC20.sol/IERC20.json")
-const ComptrollerLib = require("../artifacts/contracts/ComptrollerLib.sol/ComptrollerLib.json")
+const ComptrollerLibAbi = require("../contracts/ComptrollerLib.json")
 const IVault = require("../artifacts/contracts/IVault.sol/IVault.json")
-const { expect } = require("chai")
+const { expect, assert } = require("chai")
 const hre = require("hardhat")
 
 const { ethers } = hre
@@ -20,45 +20,53 @@ describe("Comptroller", function () {
   before(async () => {
     signer = await ethers.getSigner()
 
+    // USDC Contract (needed as denominated currency)
     usdcContractLogic = new ethers.ContractFactory(IERC20.abi, IERC20.bytecode, signer)
     usdcContractProxy = usdcContractLogic.attach(usdcAddressProxy)
 
-    vaultLogic = new ethers.ContractFactory(IVault.abi, IVault.bytecode, signer)
+    // Enzyme Vault
+    vaultLogic = new ethers.ContractFactory([...IVault.abi, ...IERC20.abi], IVault.bytecode, signer)
     vaultProxy = vaultLogic.attach(vaultAddress)
 
+    // Enzyme Comptroller
     comptrollerAddress = await vaultProxy.getAccessor()
 
-    comptrollerLogic = new ethers.ContractFactory(
-      ComptrollerLib.abi,
-      ComptrollerLib.bytecode,
-      signer
-    )
+    comptrollerLogic = new ethers.ContractFactory(ComptrollerLibAbi, [], signer)
     comptrollerProxy = comptrollerLogic.attach(comptrollerAddress)
   })
 
   describe("buyShares", function () {
     it("can transfer shares", async () => {
       const address = await signer.getAddress()
-      console.log("address", address)
-      console.log(
-        "balance",
-        ethers.utils.formatEther((await ethers.provider.getBalance(address)).toString())
-      )
+      console.log("signer address", address)
+      // console.log(
+      //   "eth balance",
+      //   ethers.utils.formatEther((await ethers.provider.getBalance(address)).toString())
+      // )
 
-      let usdcBalance = await usdcContractProxy.balanceOf(address)
-      console.log("usdc before", usdcBalance.toString())
+      const usdcBalance = await usdcContractProxy.balanceOf(address)
+      console.log("usdc balance before", usdcBalance.toString())
+      assert(usdcBalance.toNumber() > 0, `No USDC Balance for signer account`)
 
-      await usdcContractProxy.approve(comptrollerAddress, usdcBalance.toNumber())
+      const success = await usdcContractProxy.approve(comptrollerAddress, usdcBalance.toNumber())
+      assert(success)
+
+      const allowance = await usdcContractProxy.allowance(address, comptrollerAddress)
+      console.log("allowance", allowance.toString())
+      assert(allowance.toNumber() === usdcBalance.toNumber(), "Allowance doesn't equal usdcBalance")
 
       const minSharesQuantities = 1
-      await comptrollerProxy.buyShares([address], [usdcBalance.toNumber()], [minSharesQuantities])
+      await comptrollerProxy.buyShares(usdcBalance.toNumber(), minSharesQuantities)
+
+      const vaultBalance = ethers.utils.formatUnits(
+        (await vaultProxy.balanceOf(address)).toString(),
+        18
+      )
+      console.log("Vault token shares", vaultBalance)
+      assert(vaultBalance > 0)
 
       const usdcBalanceAfter = await usdcContractProxy.balanceOf(address)
-      console.log("usdc after", usdcBalance.toString())
-
-      const vaultBalance = await vaultProxy.balanceOf(address)
-      console.log("vault token", vaultBalance.toString())
-
+      console.log("usdc balance after", usdcBalanceAfter.toString())
       expect(usdcBalanceAfter.toString()).to.equal("0")
     })
   })
